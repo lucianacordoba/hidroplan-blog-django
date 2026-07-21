@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+
+# Base de datos (no se sube info sensible/local)
+db.sqlite3
+db.sqlite3-journal
+
+# Archivos subidos por usuarios
+media/
+
+# Django
+*.log
+staticfiles/
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store

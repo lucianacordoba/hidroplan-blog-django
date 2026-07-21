@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Pages - HidroPlan Blog{% endblock %}
+
+{% block content %}
+    <h1>Pages</h1>
+
+    <form class="search-box" method="get">
+        <input type="text" name="q" value="{{ query }}" placeholder="Buscar por título...">
+        <button class="btn" type="submit">Buscar</button>
+    </form>
+
+    {% if user.is_authenticated %}
+        <p><a class="btn" href="{% url 'blog:articulo_create' %}">+ Crear página</a></p>
+    {% endif %}
+
+    {% if articulos %}
+        {% for articulo in articulos %}
+            <div class="card">
+                {% if articulo.imagen %}
+                    <img class="thumb" src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
+                {% endif %}
+                <h3>{{ articulo.titulo }}</h3>
+                <p class="meta">{{ articulo.fecha_publicacion }} — {{ articulo.autor.username }}</p>
+                <p>{{ articulo.resumen }}</p>
+                <a class="btn" href="{% url 'blog:articulo_detail' articulo.pk %}">Leer más</a>
+            </div>
+        {% endfor %}
+
+        {% if is_paginated %}
+            <div>
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">« Anterior</a>
+                {% endif %}
+                <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">Siguiente »</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% else %}
+        {% if query %}
+            <p>No se encontraron páginas para "{{ query }}".</p>
+        {% else %}
+            <p>No hay páginas aún.</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

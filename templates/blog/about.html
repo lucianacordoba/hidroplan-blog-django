@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Acerca de mí - HidroPlan Blog{% endblock %}
+
+{% block content %}
+    <h1>Acerca de mí</h1>
+    <div class="card">
+        <p>
+            Hola, soy Lucía Córdoba, estudiante y desarrolladora del proyecto
+            HidroPlan IA, una iniciativa enfocada en el monitoreo y la gestión
+            inteligente de recursos hídricos.
+        </p>
+        <p>
+            Este blog nace como proyecto final del curso de Python/Django, y
+            reúne artículos sobre gestión del agua, cuencas hidrográficas y
+            tecnología aplicada a la sustentabilidad.
+        </p>
+        <p>
+            Podés contactarme a través de la sección de <a href="{% url 'mensajeria:bandeja' %}">Mensajes</a>
+            si estás registrado/a en el sitio.
+        </p>
+    </div>
+{% endblock %}

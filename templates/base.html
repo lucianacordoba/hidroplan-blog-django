@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}HidroPlan Blog{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <a class="brand" href="{% url 'blog:home' %}">💧 HidroPlan Blog</a>
+        <ul>
+            <li><a href="{% url 'blog:home' %}">Home</a></li>
+            <li><a href="{% url 'blog:about' %}">About</a></li>
+            <li><a href="{% url 'blog:articulo_list' %}">Pages</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'mensajeria:bandeja' %}">Messages</a></li>
+                <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
+                <li>
+                    <form action="{% url 'accounts:logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-link-nav">Logout</button>
+                    </form>
+                </li>
+            {% else %}
+                <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                <li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <main>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        HidroPlan Blog &copy; {% now "Y" %} — Proyecto final Python/Django
+    </footer>
+</body>
+</html>

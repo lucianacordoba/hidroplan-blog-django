@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ articulo.titulo }} - HidroPlan Blog{% endblock %}
+
+{% block content %}
+    <a href="{% url 'blog:articulo_list' %}">← Volver a Pages</a>
+
+    <div class="card">
+        {% if articulo.imagen %}
+            <img class="thumb" src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
+        {% endif %}
+        <h1>{{ articulo.titulo }}</h1>
+        <p class="meta">{{ articulo.fecha_publicacion }} — {{ articulo.autor.username }}</p>
+        <p><em>{{ articulo.resumen }}</em></p>
+        <div>{{ articulo.contenido|safe }}</div>
+
+        {% if user.is_authenticated and user == articulo.autor %}
+            <hr>
+            <a class="btn" href="{% url 'blog:articulo_update' articulo.pk %}">Editar</a>
+            <a class="btn btn-danger" href="{% url 'blog:articulo_delete' articulo.pk %}">Borrar</a>
+        {% endif %}
+    </div>
+{% endblock %}

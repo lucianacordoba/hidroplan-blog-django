@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Chat con {{ otro_usuario.username }} - HidroPlan Blog{% endblock %}
+
+{% block content %}
+    <a href="{% url 'mensajeria:bandeja' %}">← Volver a mensajes</a>
+    <h1>Chat con {{ otro_usuario.username }}</h1>
+
+    <div class="card">
+        {% for mensaje in mensajes %}
+            <div class="mensaje-burbuja {% if mensaje.emisor == user %}mensaje-propio{% else %}mensaje-otro{% endif %}">
+                <p style="margin:0;">{{ mensaje.contenido }}</p>
+                <p class="meta" style="margin:0;">{{ mensaje.fecha_envio|date:"d/m/Y H:i" }}</p>
+            </div>
+        {% empty %}
+            <p>Todavía no hay mensajes. ¡Escribí el primero!</p>
+        {% endfor %}
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn" type="submit">Enviar</button>
+    </form>
+{% endblock %}

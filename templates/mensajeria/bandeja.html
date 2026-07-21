@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Mensajes - HidroPlan Blog{% endblock %}
+
+{% block content %}
+    <h1>Mensajes</h1>
+
+    <h3>Conversaciones</h3>
+    {% if contactos %}
+        {% for c in contactos %}
+            <a href="{% url 'mensajeria:conversacion' c.usuario.id %}" style="text-decoration:none; color:inherit;">
+                <div class="contacto-item">
+                    {% if c.usuario.perfil.avatar %}
+                        <img class="avatar-mini" src="{{ c.usuario.perfil.avatar.url }}" alt="{{ c.usuario.username }}">
+                    {% endif %}
+                    <div>
+                        <strong>{{ c.usuario.username }}</strong>
+                        <p class="meta">{{ c.ultimo.contenido|truncatechars:60 }}</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <p>Todavía no tenés conversaciones.</p>
+    {% endif %}
+
+    <h3>Iniciar una nueva conversación</h3>
+    {% if otros_usuarios %}
+        <ul>
+            {% for usuario in otros_usuarios %}
+                <li><a href="{% url 'mensajeria:conversacion' usuario.id %}">{{ usuario.username }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay otros usuarios registrados todavía.</p>
+    {% endif %}
+{% endblock %}

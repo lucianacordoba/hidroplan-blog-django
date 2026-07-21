@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Mi perfil - HidroPlan Blog{% endblock %}
+
+{% block content %}
+    <h1>Mi perfil</h1>
+    <div class="card">
+        {% if perfil.avatar %}
+            <img class="avatar-grande" src="{{ perfil.avatar.url }}" alt="{{ user.username }}">
+        {% endif %}
+        <p><strong>Usuario:</strong> {{ user.username }}</p>
+        <p><strong>Nombre:</strong> {{ user.first_name }}</p>
+        <p><strong>Apellido:</strong> {{ user.last_name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Biografía:</strong> {{ perfil.biografia|default:"—" }}</p>
+        <p><strong>Link:</strong> {% if perfil.link %}<a href="{{ perfil.link }}">{{ perfil.link }}</a>{% else %}—{% endif %}</p>
+        <p><strong>Fecha de nacimiento:</strong> {{ perfil.fecha_nacimiento|default:"—" }}</p>
+
+        <a class="btn" href="{% url 'accounts:profile_edit' %}">Editar perfil</a>
+        <a class="btn btn-secondary" href="{% url 'accounts:password_change' %}">Cambiar contraseña</a>
+    </div>
+{% endblock %}

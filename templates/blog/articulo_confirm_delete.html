@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Borrar página - HidroPlan Blog{% endblock %}
+
+{% block content %}
+    <h1>¿Borrar esta página?</h1>
+    <div class="card">
+        <h3>{{ articulo.titulo }}</h3>
+        <p>{{ articulo.resumen }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">Sí, borrar</button>
+            <a class="btn btn-secondary" href="{% url 'blog:articulo_detail' articulo.pk %}">Cancelar</a>
+        </form>
+    </div>
+{% endblock %}

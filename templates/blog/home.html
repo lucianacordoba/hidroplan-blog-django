@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - HidroPlan Blog{% endblock %}
+
+{% block content %}
+    <h1>Bienvenido/a a HidroPlan Blog</h1>
+    <p>
+        Un espacio para compartir noticias, análisis y buenas prácticas sobre
+        gestión hídrica, cuencas y aprovechamiento sustentable del agua.
+    </p>
+
+    <h2>Últimas páginas</h2>
+    {% if ultimos_articulos %}
+        {% for articulo in ultimos_articulos %}
+            <div class="card">
+                {% if articulo.imagen %}
+                    <img class="thumb" src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
+                {% endif %}
+                <h3>{{ articulo.titulo }}</h3>
+                <p class="meta">{{ articulo.fecha_publicacion }} — {{ articulo.autor.username }}</p>
+                <p>{{ articulo.resumen }}</p>
+                <a class="btn" href="{% url 'blog:articulo_detail' articulo.pk %}">Leer más</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No hay páginas aún.</p>
+    {% endif %}
+
+    <a href="{% url 'blog:articulo_list' %}">Ver todas las páginas →</a>
+{% endblock %}
