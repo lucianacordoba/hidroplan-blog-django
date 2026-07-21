@@ -6,7 +6,7 @@ agua, en línea con el proyecto HidroPlan IA.
 
 ## Video de presentación
 
-📹 _[Agregar aquí el link al video de YouTube/Drive una vez grabado]_
+📹 [Ver video de demo](https://drive.google.com/file/d/142RCFw1XIJsDYIoU6uInu054bZGlWNjx/view?usp=drive_link)
 
 ## Demo / credenciales de prueba
 
