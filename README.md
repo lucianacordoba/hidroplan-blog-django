@@ -116,4 +116,4 @@ Luego abrir [http://127.0.0.1:8000/](http://127.0.0.1:8000/) en el navegador.
 
 ## Autor
 
-Lucía Córdoba — Proyecto Final individual, curso Python/Django.
+Luciana Córdoba — Proyecto Final individual, curso Python/Django.
